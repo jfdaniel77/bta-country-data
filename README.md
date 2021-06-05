@@ -71,6 +71,7 @@ These are pre-requisite for this workshop.
 All AWS services created in this workshop may incurre a cost. If you just created an AWS account, all AWS services in this workshop are mostly covered by AWS Free Tier. You will be only charged when your usage is beyond AWS Free Tier limit. For more detail, please refer to this [AWS FreeTier FAQs](https://aws.amazon.com/free/free-tier-faqs/).
 
 ## Architecture
+![Architecture Diagram](https://github.com/jfdaniel77/bta-country-data/blob/main/docs/images/architecture.JPG)
 
 ### REST APis
 
