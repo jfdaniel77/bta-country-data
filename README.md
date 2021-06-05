@@ -10,7 +10,7 @@ This is a simple workshop to build REST API using [AWS Chalice](https://aws.gith
 * Native Python packaging
 * [AWS SAM](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/what-is-sam.html) and [Terraform](https://www.terraform.io/) integration
 
-In this workshop, we are going to build simple REST APIs to list all countries in the world and get currency name for a particular country. ```chalice```
+In this workshop, we are going to build simple REST APIs to list all countries in the world and get currency name for a particular country. 
 
 ## Pre-requisite
 These are pre-requisite for this workshop.
@@ -68,10 +68,11 @@ These are pre-requisite for this workshop.
 
 ## Disclaimer
 
-All AWS services created in this workshop may incurre a cost. If you just created an AWS account, all AWS services in this workshop are mostly covered by AWS Free Tier. You will be only charged when your usage is beyond AWS Free Tier limit. For more detail, please refer to this [AWS FreeTier FAQs](https://aws.amazon.com/free/free-tier-faqs/).
+All AWS services created in this workshop may incurre a cost. If you just created an AWS account, all AWS services in this workshop are mostly covered by AWS Free Tier. You will be only charged when your usage is beyond AWS Free Tier limit. For more detail, please refer to this [AWS FreeTier FAQs](https://aws.amazon.com/free/free-tier-faqs/). No upfront investments are required and you only pay only for the resources you use.
 
 ## Architecture
 ![Architecture Diagram](https://github.com/jfdaniel77/bta-country-data/blob/main/docs/images/architecture.JPG)
+
 
 ### REST APis
 
