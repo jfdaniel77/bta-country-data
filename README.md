@@ -1,4 +1,9 @@
-# Building REST API using AWS Chalice
+# Building REST API using AWS Chalice (under development) :hammer:
+
+![GitHub last commit](https://img.shields.io/github/last-commit/jfdaniel77/bta-country-data)
+![GitHub](https://img.shields.io/github/license/jfdaniel77/bta-country-data)
+![Status](https://img.shields.io/badge/status-in%20progress-blue)
+
 
 This is a simple workshop to build REST API using [AWS Chalice](https://aws.github.io/chalice/). AWS Chalice is a framework for writing serverless apps in Python.  It provides:
 
@@ -81,6 +86,67 @@ All AWS services created in this workshop may incurre a cost. If you just create
 ### Environment Setup
 
 ### Install Dependencies
+
+```python
+@app.route('/')
+def index():
+    return {'hello': 'world'}
+```
+
+```python
+@app.route('/country-list', methods=['GET'], cors=True)
+def get_country_list():
+    """
+    This function returns all countries.
+    
+    Args: N/A
+    
+    Returns: List of country in JSON format.
+    """
+    data = []
+
+    for country in pycountry.countries:
+        record = {}
+        record["code"] = country.alpha_2
+        
+        name = country.name
+        record["name"] = name
+        
+        data.append(record)
+
+    return data
+```
+
+```python
+@app.route('/currency/{country}', methods=['GET'], cors=True)
+def get_currency(country):
+    """
+    This function returns currency based on country.
+    
+    Args: country
+    
+    Returns: Currency name in JSON format
+    """
+    
+    if country is None or len(country) == 0:
+        raise BadRequestError("Country is required in this REST APi")
+        
+    result = pycountry.countries.search_fuzzy(country)
+    
+    data = []
+    
+    if result is None or len(result) == 0:
+        raise BadRequestError("Country {} is not availalbe".format(country))
+    else:
+        for country in result:
+            currency = {}
+            value = pycountry.currencies.get(numeric=country.numeric)
+            if value:
+                currency['currency'] = value.name
+                data.append(currency)
+    
+    return data
+```
 
 ## Deployment
 
