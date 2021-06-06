@@ -1,4 +1,9 @@
-# Building REST API using AWS Chalice
+# Building REST API using AWS Chalice (under development) :hammer:
+
+![GitHub last commit](https://img.shields.io/github/last-commit/jfdaniel77/bta-country-data)
+![GitHub](https://img.shields.io/github/license/jfdaniel77/bta-country-data)
+![Status](https://img.shields.io/badge/status-in%20progress-blue)
+
 
 This is a simple workshop to build REST API using [AWS Chalice](https://aws.github.io/chalice/). AWS Chalice is a framework for writing serverless apps in Python.  It provides:
 
@@ -10,7 +15,7 @@ This is a simple workshop to build REST API using [AWS Chalice](https://aws.gith
 * Native Python packaging
 * [AWS SAM](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/what-is-sam.html) and [Terraform](https://www.terraform.io/) integration
 
-In this workshop, we are going to build simple REST APIs to list all countries in the world and get currency name for a particular country. ```chalice```
+In this workshop, we are going to build simple REST APIs to list all countries in the world and get currency name for a particular country. 
 
 ## Pre-requisite
 These are pre-requisite for this workshop.
@@ -68,9 +73,11 @@ These are pre-requisite for this workshop.
 
 ## Disclaimer
 
-All AWS services created in this workshop may incurre a cost. If you just created an AWS account, all AWS services in this workshop are mostly covered by AWS Free Tier. You will be only charged when your usage is beyond AWS Free Tier limit. For more detail, please refer to this [AWS FreeTier FAQs](https://aws.amazon.com/free/free-tier-faqs/).
+All AWS services created in this workshop may incurre a cost. If you just created an AWS account, all AWS services in this workshop are mostly covered by AWS Free Tier. You will be only charged when your usage is beyond AWS Free Tier limit. For more detail, please refer to this [AWS FreeTier FAQs](https://aws.amazon.com/free/free-tier-faqs/). No upfront investments are required and you only pay only for the resources you use.
 
 ## Architecture
+![Architecture Diagram](https://github.com/jfdaniel77/bta-country-data/blob/main/docs/images/architecture.JPG)
+
 
 ### REST APis
 
@@ -79,6 +86,67 @@ All AWS services created in this workshop may incurre a cost. If you just create
 ### Environment Setup
 
 ### Install Dependencies
+
+```python
+@app.route('/')
+def index():
+    return {'hello': 'world'}
+```
+
+```python
+@app.route('/country-list', methods=['GET'], cors=True)
+def get_country_list():
+    """
+    This function returns all countries.
+    
+    Args: N/A
+    
+    Returns: List of country in JSON format.
+    """
+    data = []
+
+    for country in pycountry.countries:
+        record = {}
+        record["code"] = country.alpha_2
+        
+        name = country.name
+        record["name"] = name
+        
+        data.append(record)
+
+    return data
+```
+
+```python
+@app.route('/currency/{country}', methods=['GET'], cors=True)
+def get_currency(country):
+    """
+    This function returns currency based on country.
+    
+    Args: country
+    
+    Returns: Currency name in JSON format
+    """
+    
+    if country is None or len(country) == 0:
+        raise BadRequestError("Country is required in this REST APi")
+        
+    result = pycountry.countries.search_fuzzy(country)
+    
+    data = []
+    
+    if result is None or len(result) == 0:
+        raise BadRequestError("Country {} is not availalbe".format(country))
+    else:
+        for country in result:
+            currency = {}
+            value = pycountry.currencies.get(numeric=country.numeric)
+            if value:
+                currency['currency'] = value.name
+                data.append(currency)
+    
+    return data
+```
 
 ## Deployment
 
@@ -90,4 +158,4 @@ Deleting resources that are not actively being used reduces costs and is a best 
 ## Next Steps
 
 ## Feedbacks
-
+If you have any feedback or encounter an issue, please open issues or describe the proposed changes in your pull request.
