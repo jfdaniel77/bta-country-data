@@ -17,7 +17,7 @@ This is a simple workshop to build REST API using [AWS Chalice](https://aws.gith
 
 In this workshop, we are going to build simple REST APIs to list all countries in the world and get currency name for a particular country. 
 
-## Pre-requisite
+## Pre-requisites
 These are pre-requisite for this workshop.
 + You need to have an AWS account.
   If you do not have an AWS account, you can follow following steps:
