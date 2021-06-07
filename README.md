@@ -156,6 +156,7 @@ def get_currency(country):
 Deleting resources that are not actively being used reduces costs and is a best practice. Not deleting your resources will result in charges to your account.
 
 ## Next Steps
+Now, that you understand how to build a simple application using AWS Chalice, you can use this workshop as starting point for building your own. You can find more application samples at [here](https://chalice-workshop.readthedocs.io/en/latest/)
 
 ## Feedbacks
 If you have any feedback or encounter an issue, please open issues or describe the proposed changes in your pull request.
