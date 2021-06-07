@@ -15,7 +15,18 @@ This is a simple workshop to build REST API using [AWS Chalice](https://aws.gith
 * Native Python packaging
 * [AWS SAM](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/what-is-sam.html) and [Terraform](https://www.terraform.io/) integration
 
-In this workshop, we are going to build simple REST APIs to list all countries in the world and get currency name for a particular country. 
+In this workshop, we are going to build simple REST APIs to list all countries in the world and get currency name for a particular country. In highlevel overview, you will do these thngs to complete this workshop:
+* Setting working environment
+* Build two simple functions to return list of countries and currency name
+* Perform unit test for both functions to verify if those are working as expected
+* Adding authentication feature
+* Deploy application using simple CI/CD pipeline
+
+You can use browser or any REST client tool (e.g. [Postman](https://www.postman.com/), [Insomnia](https://insomnia.rest/), etc) to test your REST APIs.
+
+This repository contains final solution for this workshop. You can clone it to your local machine and deploy it to see the result. However, I recommend you to make your hands dirty with trying it from scratch after reading this guideline :smile:
+
+> Note: Repository for CI/CD pipeline in this workshop uses [AWS Code Commit](). If you clone the workshop from this GitHub repository and want to run deployment provided in this workshop, you need to follow this [guideline](https://docs.aws.amazon.com/codecommit/latest/userguide/how-to-mirror-repo-pushes.html)
 
 ## Pre-requisites
 These are pre-requisite for this workshop.
@@ -159,4 +170,4 @@ Deleting resources that are not actively being used reduces costs and is a best 
 Now, that you understand how to build a simple application using AWS Chalice, you can use this workshop as starting point for building your own. You can find more application samples at [here](https://chalice-workshop.readthedocs.io/en/latest/)
 
 ## Feedbacks
-If you have any feedback or encounter an issue, please open issues or describe the proposed changes in your pull request.
+If you have any feedback or encounter an issue, please open an issue or describe the proposed changes in your pull request.
