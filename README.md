@@ -160,6 +160,7 @@ def get_currency(country):
 ```
 
 ## Deployment
+Chalice is equipped with basic CI/CD pipeline especially when you are working in a team. Using this pipeline, you can perform testing on code changes, build test stage and promote build to production stage automatically. Behind the scene, Chalice will generate a CloudFormation template that is used to build intial CI/CD pipeline. By default, it contains an AWS CodeCommit repo, an AWS CodeBuild stage for packaging your chalice app, and an AWS CodePipeline stage to deploy your application using CloudFormation.
 
 ## Testing
 
