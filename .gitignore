@@ -1,5 +1,5 @@
 .chalice/deployments/
-.chalice/venv/
+.chalice/.venv/
 .chalice/deployed/
 .pytest_cache
 __pycache__
