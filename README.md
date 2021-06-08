@@ -102,9 +102,63 @@ This is REST APIs that we are going to build:
 
 ### Environment Setup
 
+a. Create new Chalice projects
+
+```
+$ chalice new-project country-data
+Your project has been generated in ./country-data
+```
+
+To ensure that the project was created correctly, list the contents of the newly created ```country-data``` directory.
+Please make sure that ```country-data``` directory contains ```app.py``` and ```requirements.txt```.
+
+```
+$ ls -la
+total 8
+drwxrwxr-x 3 ec2-user ec2-user  78 Jun  8 13:07 .
+drwxrwxr-x 3 ec2-user ec2-user  26 Jun  8 13:07 ..
+-rw-rw-r-- 1 ec2-user ec2-user 737 Jun  8 13:07 app.py
+drwxrwxr-x 2 ec2-user ec2-user  25 Jun  8 13:07 .chalice
+-rw-rw-r-- 1 ec2-user ec2-user  37 Jun  8 13:07 .gitignore
+-rw-rw-r-- 1 ec2-user ec2-user   0 Jun  8 13:07 requirements.txt
+```
+
+Let's verify that our new application is working. Run ```chalice local``` to spin up a version of the application running locally:
+```
+$ chalice local
+Serving on http://127.0.0.1:8000
+Restarting local dev server.
+Serving on http://127.0.0.1:8000
+```
+
+Open another terminal and make an HTTP request to application running the ```localhost```:
+
+```
+$ pip install httpie
+```
+
+```
+ $ http http://127.0.0.1:8000
+HTTP/1.1 200 OK
+Content-Length: 17
+Content-Type: application/json
+Date: Tue, 08 Jun 2021 13:17:23 GMT
+Server: BaseHTTP/0.6 Python/3.7.9
+
+{
+    "hello": "world"
+}
+```
+
+If we looked at our original terminal, our HTTP request is logged on console.
+
+```
+127.0.0.1 - - [08/Jun/2021 13:17:23] "GET / HTTP/1.1" 200 -
+```
+
+b. Install Dependencies
 
 
-### Install Dependencies
 
 ```python
 @app.route('/')
