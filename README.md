@@ -93,10 +93,12 @@ All AWS services created in this workshop may incurre a cost. If you just create
 ### REST APis
 This is REST APIs that we are going to build:
 
+
 | HTTP Method | URI Path            | Description       |
-|-------------|---------------------|-------------------|
+| :---        |    :----:   |          ---: |
 | GET         | /country            | List of countries |
 | GET         | /currency/{country} | Get currency name |
+
 
 ## Code Walkthrough
 
