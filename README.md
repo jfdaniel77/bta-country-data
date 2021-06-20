@@ -97,7 +97,7 @@ This is REST APIs that we are going to build:
 
 | HTTP Method | URI Path            | Description       |
 | :---        |    :----:   |          ---: |
-| GET         | /country            | List of countries |
+| GET         | /country-list            | List of countries |
 | GET         | /currency/{country} | Get currency name |
 
 
@@ -167,8 +167,8 @@ Server: BaseHTTP/0.6 Python/3.7.9
     "hello": "world"
 }
 ```
-
-If we looked at our original terminal, our HTTP request is logged on console.
+The HTTP response back should consist of the JSON body: {"hello": "world"}. 
+If we looked at our original terminal, our HTTP request is logged on console too.
 
 ```
 127.0.0.1 - - [08/Jun/2021 13:17:23] "GET / HTTP/1.1" 200 -
@@ -204,22 +204,30 @@ $ pip install pycountry
 ```
 
 ### First Deployment Verification
-
-### Add new route ```/country```
-
-### Add new route ```/currency/{country}```
-
-### Add Authentication
-
-### Unit Testing
-
-
+Inside ```app.py```, we will see following code that was created when generating Chalice application.
 
 ```python
 @app.route('/')
 def index():
     return {'hello': 'world'}
 ```
+
+Deploy the updated application using ```chalice deploy```:
+
+```
+$ chalice deploy
+```
+
+*Please make sure that you have configured AWS Credentials.*
+
+
+
+Now using httpie, we try to access our first deployment.
+
+*Note: You can also use browser or REST client tool to test it.*
+
+
+### Add new route ```/country-list```
 
 ```python
 @app.route('/country-list', methods=['GET'], cors=True)
@@ -244,6 +252,8 @@ def get_country_list():
 
     return data
 ```
+
+### Add new route ```/currency/{country}```
 
 ```python
 @app.route('/currency/{country}', methods=['GET'], cors=True)
@@ -275,6 +285,10 @@ def get_currency(country):
     
     return data
 ```
+
+### Add Authentication
+
+### Unit Testing
 
 ## Deployment
 Chalice is equipped with basic CI/CD pipeline especially when you are working in a team. Using this pipeline, you can perform testing on code changes, build test stage and promote build to production stage automatically. Behind the scene, Chalice will generate a CloudFormation template that is used to build intial CI/CD pipeline. By default, it contains an AWS CodeCommit repo, an AWS CodeBuild stage for packaging your chalice app, and an AWS CodePipeline stage to deploy your application using CloudFormation.
