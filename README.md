@@ -94,10 +94,12 @@ The main component of this application is REST APIs backed by Amazon API Gateway
 ### REST APis
 This is REST APIs that we are going to build:
 
+
 | HTTP Method | URI Path            | Description       |
-|-------------|---------------------|-------------------|
+| :---        |    :----:   |          ---: |
 | GET         | /country            | List of countries |
 | GET         | /currency/{country} | Get currency name |
+
 
 ## Code Walkthrough
 
