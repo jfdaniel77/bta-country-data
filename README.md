@@ -89,6 +89,7 @@ All AWS services created in this workshop may incurre a cost. If you just create
 ## Architecture
 ![Architecture Diagram](https://github.com/jfdaniel77/bta-country-data/blob/main/docs/images/architecture.JPG)
 
+The main component of this application is REST APIs backed by Amazon API Gateway and AWS Lambda. Those APIs let you access backend process to get list of countries and currency name. In order to get data, we implement a simple authentication using username and password that we store the detail inside Amazon DynamoDb table.
 
 ### REST APis
 This is REST APIs that we are going to build:
@@ -155,6 +156,23 @@ If we looked at our original terminal, our HTTP request is logged on console.
 ```
 127.0.0.1 - - [08/Jun/2021 13:17:23] "GET / HTTP/1.1" 200 -
 ```
+
+```
+$ python -m venv .chalice/.venv
+```
+
+```
+$ source .chalice/.venv/bin/activate
+```
+
+```
+$ pip list
+Package    Version
+---------- -------
+pip        20.1.1
+setuptools 47.1.0
+```
+
 
 b. Install Dependencies
 
