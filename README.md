@@ -89,7 +89,7 @@ All AWS services created in this workshop may incurre a cost. If you just create
 ## Architecture
 ![Architecture Diagram](https://github.com/jfdaniel77/bta-country-data/blob/main/docs/images/architecture.JPG)
 
-The main component of this application is REST APIs backed by Amazon API Gateway and AWS Lambda. Those APIs let you access backend process to get list of countries and currency name. In order to get data, we implement a simple authentication using username and password that we store the detail inside Amazon DynamoDb table.
+The main component of this application is REST APIs backed by Amazon API Gateway and AWS Lambda. Those APIs let you access backend processes to get list of countries and currency name. In order to get data, we implement a simple authentication using username and password that we store the detail inside Amazon DynamoDb table.
 
 ### REST APis
 This is REST APIs that we are going to build:
@@ -104,18 +104,30 @@ This is REST APIs that we are going to build:
 ## Code Walkthrough
 
 ### Environment Setup
+First, let's setup our environment. Please make sure that you have Python 3 installed. We install ```chalice``` using ```pip```:
 
-a. Create new Chalice projects
+```
+$ pip install chalice
+```
+
+To check if ```chalice``` has been install properly, run:
+
+```
+$ chalice --version
+chalice 1.23.0, python 3.7.9, linux 4.14.232-176.381.amzn2.x86_64
+```
+
+With ```chalice``` now installed, we can create our Chalice application. Run this command to create a new Chalice application, ```country-data``` 
 
 ```
 $ chalice new-project country-data
 Your project has been generated in ./country-data
 ```
 
-To ensure that the project was created correctly, list the contents of the newly created ```country-data``` directory.
-Please make sure that ```country-data``` directory contains ```app.py``` and ```requirements.txt```.
+To ensure that the project was created correctly, list the contents of the newly created ```country-data``` directory. Please make sure that ```country-data``` directory contains ```app.py``` and ```requirements.txt```.
 
 ```
+$ cd country-data
 $ ls -la
 total 8
 drwxrwxr-x 3 ec2-user ec2-user  78 Jun  8 13:07 .
@@ -126,7 +138,8 @@ drwxrwxr-x 2 ec2-user ec2-user  25 Jun  8 13:07 .chalice
 -rw-rw-r-- 1 ec2-user ec2-user   0 Jun  8 13:07 requirements.txt
 ```
 
-Let's verify that our new application is working. Run ```chalice local``` to spin up a version of the application running locally:
+Verify that our new application is working. Run ```chalice local``` to spin up a version of the application running locally:
+
 ```
 $ chalice local
 Serving on http://127.0.0.1:8000
@@ -134,11 +147,13 @@ Restarting local dev server.
 Serving on http://127.0.0.1:8000
 ```
 
-Open another terminal and make an HTTP request to application running the ```localhost```:
+You should also be able to interact with your newly deployed API on your local machine. To do so, first install ```httpie```:
 
 ```
 $ pip install httpie
 ```
+
+Open another terminal and make an HTTP request to application that is running the ```localhost```:
 
 ```
  $ http http://127.0.0.1:8000
@@ -159,24 +174,44 @@ If we looked at our original terminal, our HTTP request is logged on console.
 127.0.0.1 - - [08/Jun/2021 13:17:23] "GET / HTTP/1.1" 200 -
 ```
 
+Congratulations! Our newly Chalice application is running well.
+
+
+Now, let's create our virtualenv with Chalice installed with following command. It will create a new virtualenv  called ```.venv```.
+
 ```
 $ python -m venv .chalice/.venv
 ```
+
+Activate your newly created virtualenv.
 
 ```
 $ source .chalice/.venv/bin/activate
 ```
 
+Note: If you are using a Windows environment, you will have to run:
+
 ```
-$ pip list
-Package    Version
----------- -------
-pip        20.1.1
-setuptools 47.1.0
+> .chalice\.venv\Scripts\activate
 ```
 
+### Install Dependencies
+Next step, we install our depencies. We need to have ```botocore```  and ```pycountry```.
 
-b. Install Dependencies
+```
+$ pip install botocore
+$ pip install pycountry
+```
+
+### First Deployment Verification
+
+### Add new route ```/country```
+
+### Add new route ```/currency/{country}```
+
+### Add Authentication
+
+### Unit Testing
 
 
 
@@ -243,8 +278,6 @@ def get_currency(country):
 
 ## Deployment
 Chalice is equipped with basic CI/CD pipeline especially when you are working in a team. Using this pipeline, you can perform testing on code changes, build test stage and promote build to production stage automatically. Behind the scene, Chalice will generate a CloudFormation template that is used to build intial CI/CD pipeline. By default, it contains an AWS CodeCommit repo, an AWS CodeBuild stage for packaging your chalice app, and an AWS CodePipeline stage to deploy your application using CloudFormation.
-
-## Testing
 
 ## Cleaning Up
 Deleting resources that are not actively being used reduces costs and is a best practice. Not deleting your resources will result in charges to your account.
